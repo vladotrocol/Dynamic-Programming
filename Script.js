@@ -67,22 +67,87 @@ function add_code(){
         cd.innerText = s[i];
     }
 }
+
+var pos={
+    x:0,
+    y:0
+};
+
+function draw_table(ctx, canvas, b, m, n, offsetX, offsetY){
+    var zoom = 2;
+    var tw = n*zoom*10;
+    var th = m*zoom*10;
+    canvas.width = canvas.width;
+    if(pos.x==0&&pos.y==0){
+        if(tw<canvas.width){
+            pos.x = (canvas.width - tw)/2
+        }
+        if(th<canvas.height){
+            pos.y = (canvas.height - th)/2
+        }
+    }
+    for(var i=0;i<m;i++){
+        for(var j=0;j<n;j++){
+            ctx.strokeRect((j)*10*zoom+offsetX+pos.x, (i)*10*zoom+offsetY+pos.y, 10*zoom, 10*zoom);
+        }
+    }
+    pos.x+=offsetX;
+    pos.y+=offsetY; 
+}
+
+
+     // Get Current Mouse Position
+   function getMouse(e) {
+        var x, y;
+        if (e.layerX || e.layerY) {
+            x = e.layerX;
+            y = e.layerY;
+        }
+        else {
+            x = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
+            y = e.clientY + document.body.scrollTop + document.documentElement.scrollTop;
+        }               
+        return {x:x, y:y};
+        }
+
 window.onload = function() {
     var input1 = document.getElementById("S1");
     var input2 = document.getElementById("S2");
+    var canvas = document.getElementById("canvas");
+    canvas.width = document.getElementById("TableWrap").clientWidth;
+    canvas.height = document.getElementById("TableWrap").clientHeight;
+    var ctx = canvas.getContext("2d");
+    var drag = false;
+    var start_position;
+    var offsetX = 0;
+    var offsetY = 0;
+    pos.x=0;
+    pos.y=0;
     add_code();
-    input1.onkeyup = process;
-    input2.onkeyup = process;
+    input1.onkeyup = function (e){process(ctx, canvas,offsetX, offsetY);};
+    input2.onkeyup = function (e){process(ctx, canvas,offsetX, offsetY);};
+    canvas.onmousedown = function (e){drag = true;start_position = getMouse(e);};
+    canvas.onmouseup = function (e){drag = false};
+    canvas.onmousemove = function (e){
+        if(drag == true){
+            offsetX=getMouse(e).x-start_position.x;
+            offsetY=getMouse(e).y-start_position.y;
+            process(ctx, canvas, offsetX, offsetY);
+            start_position = getMouse(e);
+        }
+     };  
+
 }
 
-function process() {
+function process(ctx, canvas, offsetX, offsetY) {
     var s1 = document.getElementById("S1").value;
     var s2 = document.getElementById("S2").value;
     if (s1.length > 0 && s2.length > 0) {
         Out.length = 0;
         var a = LCS_Length(s1, s2);
+        draw_table(ctx, canvas, a.b, s1.length, s2.length, offsetX, offsetY);
         printLCS(a.b, s1, s1.length, s2.length);
-        var rezult = document.getElementById("Panel");
+        var rezult = document.getElementById("Rezults");
         rezult.innerText = a.c[s1.length][s2.length] + Out.join();
     }
 }
