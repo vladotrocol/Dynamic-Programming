@@ -47,10 +47,25 @@ function printLCS(b, X, i, j) {
     } else if (b[i][j] == "{") {
         printLCS(b, X, i - 1, j - 1);
         Out.push(X.charAt(i - 1));
+        Path.push({
+            i: i,
+            j: j,
+            t: "{"
+        });
     } else if (b[i][j] == "|") {
         printLCS(b, X, i - 1, j);
+         Path.push({
+            i: i,
+            j: j,
+            t: "|"
+        });
     } else if (b[i][j] == "-") {
         printLCS(b, X, i, j - 1);
+         Path.push({
+            i: i,
+            j: j,
+            t: "-"
+        });
     }
 }
 
@@ -74,23 +89,24 @@ var pos = {
     y: 0
 };
 
-function draw_table(ctx, canvas, a, s1, s2, offsetX, offsetY) {
-    var zoom = 3;
+var zoom = 5;
+var a, s1, s2, canvas, ctx;
+
+function draw_table(offsetX, offsetY) {
+
     var tw = (s2.length) * zoom * 10;
     var th = (s1.length) * zoom * 10;
     var x = offsetX;
     var y = offsetY;
     canvas.width = canvas.width;
-    if (tw + zoom * 10 < canvas.width) {
+    if (tw + 2 * zoom * 10 < canvas.width) {
         pos.x = (canvas.width - tw) / 2
-        x = 0;
     }
-    if (th + zoom * 10 < canvas.height) {
+    if (th + 2 * zoom * 10 < canvas.height) {
         pos.y = (canvas.height - th) / 2
-        y = 0;
     }
-    if (pos.x + x > -2 * zoom * 10 - tw + canvas.width && pos.x + x < 0 + zoom * 10) pos.x += x;
-    if (pos.y + y > -2 * zoom * 10 - th + canvas.height && pos.y + y < 0 + zoom * 10) pos.y += y;
+    if (pos.x + x > -2 * zoom * 10 - tw + canvas.width && pos.x + x < 0 + 2 * zoom * 10) pos.x += x;
+    if (pos.y + y > -2 * zoom * 10 - th + canvas.height && pos.y + y < 0 + 2 * zoom * 10) pos.y += y;
     ctx.fillStyle = '#00ff00';
     ctx.font = "italic " + zoom * 4 + "px sans-serif";
     ctx.textBaseline = 'top';
@@ -99,28 +115,111 @@ function draw_table(ctx, canvas, a, s1, s2, offsetX, offsetY) {
     ctx.fillStyle = '#0000ff';
     ctx.font = "italic " + zoom * 4 + "px sans-serif";
     ctx.fillText("j", pos.x - ctx.measureText("j").width - 8, pos.y - 2 * zoom * 5 - 2);
-    ctx.fillText("i", pos.x - zoom * 10, pos.y-zoom*5  );
-    for (var i = 0; i <= m; i++) {
-        for (var j = 0; j <= n; j++) {
-            
-            ctx.font = "italic " + zoom * 5 + "px sans-serif";
+    ctx.fillText("i", pos.x - zoom * 10, pos.y - zoom * 5);
 
-            ctx.strokeRect((j) * 10 * zoom + pos.x, (i) * 10 * zoom + pos.y, 10 * zoom, 10 * zoom);
-            ctx.fillStyle = '#ff0000';
-            ctx.fillText(a.c[i][j], pos.x + (j + 1) * zoom * 10 - ctx.measureText(a.c[i][j]).width - 4, pos.y + (i + 1) * zoom * 10 - zoom * 5 - 2);
-            ctx.fillStyle = '#00ff00';
-            if (j < n) {
-                ctx.fillText(s2[j], (j + 1) * zoom * 10 + pos.x + zoom * 5 / 2, pos.y - zoom * 5 - 2);
-            }
-            ctx.fillStyle = '#0000ff';
-            ctx.font = "italic " + zoom * 4 + "px sans-serif";
-            ctx.fillText(j, (j) * zoom * 10 + pos.x + zoom * 5 / 2, pos.y - 2 * zoom * 5 - 2);
+    for (var it in Path) {
+        ctx.fillStyle = "ccc";
+        ctx.fillRect(Path[it].j * zoom * 10 + pos.x, Path[it].i * 10 * zoom + pos.y, zoom * 10, zoom * 10);
+    }
+
+        for (var it in Path) {
+        if(Path[it].t=="{"){
+            ctx.fillStyle = "#ff0";
+            ctx.lineWidth= 0;
+            ctx.beginPath();
+            ctx.arc(Path[it].j * zoom * 10 + pos.x+30*zoom/4, Path[it].i * 10 * zoom + pos.y+30*zoom/4,5*zoom/2, 0, 2*Math.PI, false);
+            ctx.fill();
+            ctx.closePath();
+
+            ctx.beginPath();
+            ctx.arc(Path[it].j * zoom * 10 + pos.x+4*zoom, -5 * zoom/2 + pos.y -2,5*zoom/2, 0, 2*Math.PI, false);
+            ctx.fill();
+            ctx.closePath();
+
+            ctx.beginPath();
+            ctx.arc(pos.x-5*zoom/2,Path[it].i*zoom*10+pos.y+5*zoom+2,5*zoom/2, 0, 2*Math.PI, false);
+            ctx.fill();
+            ctx.closePath();
         }
-        ctx.fillText(i, pos.x - zoom * 10, (i) * zoom * 10 + pos.y + zoom * 5 / 2);
-        ctx.fillStyle = '#00ff00';
-        ctx.font = "italic " + zoom * 5 + "px sans-serif";
-        if (i < m) {
-            ctx.fillText(s1[i], pos.x - ctx.measureText(s1[i]).width - 4, (i + 1) * zoom * 10 + pos.y + zoom * 5 / 2);
+    }
+
+    for (var i = 0; i <= m; i++) {
+        var ii = i * 10 * zoom + pos.y;
+        if (ii > -zoom * 10) {
+            if (ii < canvas.height + zoom * 10) {
+                var txtSize = 0;
+                for (var j = 0; j <= n; j++) {
+                    var jj = j * 10 * zoom + pos.x;
+                    if(a.c[i][j]<=9){
+                        txtSize = zoom*5;
+                    }else if (a.c[i][j]<=99){
+                        txtSize = zoom*5/2;
+                    }
+                    else{
+                       txtSize = 3*zoom*5/7;
+                    }
+                    if (jj > -zoom * 10) {
+                        if (jj < canvas.width + zoom * 10) {
+                            ctx.font = "italic " + txtSize + "px sans-serif";
+                            ctx.strokeStyle = "rgba(0, 0 ,0, 1)";
+                            ctx.lineWidth = 1;
+                            ctx.strokeRect(jj, ii, 10 * zoom, 10 * zoom);
+                            ctx.fillStyle = '#ff0000';
+                            ctx.fillText(a.c[i][j], pos.x + (j + 1) * zoom * 10 - ctx.measureText(a.c[i][j]).width - 4, pos.y + (i + 1) * zoom * 10 -txtSize - 2);
+                            ctx.fillStyle = '#00ff00';
+                            if (j < n) {
+                                ctx.fillText(s2[j], (j + 1) * zoom * 10 + pos.x + zoom * 5 / 2, pos.y - zoom * 5 - 4);
+                            }
+                            ctx.fillStyle = '#0000ff';
+                            ctx.font = "italic " + zoom * 4 + "px sans-serif";
+                            ctx.fillText(j, jj + zoom * 5 / 2, pos.y - 2 * zoom * 5 - 2);
+
+                            ctx.lineWidth = Math.round(zoom / 3);
+                            ctx.strokeStyle = "rgba(255, 20 ,189, 1)";
+                            if (a.b[i][j] == "-") {
+                                ctx.beginPath();
+                                ctx.moveTo(jj + 5 * zoom, ii + 7 * zoom);
+                                ctx.lineTo(jj + zoom, ii + 7 * zoom);
+                                ctx.lineTo(jj + 3 * zoom, ii + 6 * zoom);
+                                ctx.moveTo(jj + zoom, ii + 7 * zoom);
+                                ctx.lineTo(jj + 3 * zoom, ii + 8 * zoom);
+                                ctx.closePath();
+                                ctx.stroke();
+                            } else if (a.b[i][j] == "|") {
+                                ctx.beginPath();
+                                ctx.moveTo(jj + 7 * zoom, ii + 5 * zoom);
+                                ctx.lineTo(jj + 7 * zoom, ii + zoom);
+                                ctx.lineTo(jj + 6 * zoom, ii + 3 * zoom);
+                                ctx.moveTo(jj + 7 * zoom, ii + zoom);
+                                ctx.lineTo(jj + 8 * zoom, ii + 3 * zoom);
+                                ctx.closePath();
+                                ctx.stroke();
+                            } else if (a.b[i][j] == "{") {
+                                ctx.beginPath();
+                                ctx.moveTo((jj) + 5 * zoom, ii + 5 * zoom);
+                                ctx.lineTo(jj + zoom, ii + zoom);
+                                ctx.lineTo(jj + zoom, ii + 3 * zoom);
+                                ctx.moveTo(jj + 3 *  zoom, ii + zoom);
+                                ctx.lineTo(jj + zoom, ii + zoom);
+                                ctx.closePath();
+                                ctx.stroke();
+                            }
+                            
+                        } else {
+                            j = n;
+                        }
+                    }
+                }
+                ctx.lineWidth = 1;
+                ctx.fillText(i, pos.x - zoom * 10, ii + zoom * 5 / 2);
+                ctx.fillStyle = '#00ff00';
+                ctx.font = "italic " + zoom * 5 + "px sans-serif";
+                if (i < m) {
+                    ctx.fillText(s1[i], pos.x - ctx.measureText(s1[i]).width - 4, (i + 1) * zoom * 10 + pos.y + zoom * 5 / 2);
+                }
+            } else {
+                i = m;
+            }
         }
     }
 }
@@ -128,7 +227,6 @@ function draw_table(ctx, canvas, a, s1, s2, offsetX, offsetY) {
 
 
 // Get Current Mouse Position
-
 
 function getMouse(e) {
     var x, y;
@@ -148,22 +246,23 @@ function getMouse(e) {
 window.onload = function() {
     var input1 = document.getElementById("S1");
     var input2 = document.getElementById("S2");
-    var canvas = document.getElementById("canvas");
+    canvas = document.getElementById("canvas");
     canvas.width = document.getElementById("TableWrap").clientWidth;
     canvas.height = document.getElementById("TableWrap").clientHeight;
-    var ctx = canvas.getContext("2d");
+    ctx = canvas.getContext("2d");
     var drag = false;
     var start_position;
     var offsetX = 0;
     var offsetY = 0;
+    var pace = 1;
     pos.x = 0;
     pos.y = 0;
     add_code();
     input1.onkeyup = function(e) {
-        process(ctx, canvas, offsetX, offsetY);
+        process(offsetX, offsetY);
     };
     input2.onkeyup = function(e) {
-        process(ctx, canvas, offsetX, offsetY);
+        process(offsetX, offsetY);
     };
     canvas.onmousedown = function(e) {
         drag = true;
@@ -177,24 +276,40 @@ window.onload = function() {
     };
     canvas.onmousemove = function(e) {
         if (drag == true) {
-            offsetX = getMouse(e).x - start_position.x;
-            offsetY = getMouse(e).y - start_position.y;
-            process(ctx, canvas, offsetX, offsetY);
-            start_position = getMouse(e);
+            if (pace == 1) {
+                offsetX = getMouse(e).x - start_position.x;
+                offsetY = getMouse(e).y - start_position.y;
+                draw_table(offsetX, offsetY);
+                start_position = getMouse(e);
+            }
+            pace++;
+            if (pace == 2) pace = 1;
+        }
+    };
+
+    canvas.onmousewheel = function (e){
+        if(e.wheelDelta>=120){
+            zoom++;
+            draw_table(0,0);
+        }
+        else if(e.wheelDelta<=-120&&zoom>=2){
+            zoom--;
+            draw_table(0,0);
         }
     };
 
 }
 
-function process(ctx, canvas, offsetX, offsetY) {
-    var s1 = document.getElementById("S1").value;
-    var s2 = document.getElementById("S2").value;
+function process(offsetX, offsetY) {
+    s1 = document.getElementById("S1").value;
+    s2 = document.getElementById("S2").value;
     if (s1.length > 0 && s2.length > 0) {
         Out.length = 0;
-        var a = LCS_Length(s1, s2);
-        draw_table(ctx, canvas, a, s1, s2, offsetX, offsetY);
+        Path.length = 0;
+        a = LCS_Length(s1, s2);
         printLCS(a.b, s1, s1.length, s2.length);
+        draw_table(0, 0);
         var rezult = document.getElementById("Rezults");
-        rezult.innerText = a.c[s1.length][s2.length] + Out.join();
+        rezult.innerText = a.c[s1.length][s2.length] + "\n" + Out.join();
     }
 }
