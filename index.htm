@@ -1,6 +1,8 @@
 <html>
 	<head>
-		<script type="text/javascript" src="code.js"></script>
+		<script type="text/javascript" src="jsCode.js"></script>
+		<script type="text/javascript" src="cCode.js"></script>
+		<script type="text/javascript" src="sCode.js"></script>
 		<script type="text/javascript" src="Script.js"></script>
 		<link rel="stylesheet" type="text/css" href="Style.css" />
 		<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Inconsolata">
@@ -9,8 +11,13 @@
 	<body>
 		<div id="Panel">
 			<div id="ContentPanel">
-				<div id="Rezults">				
+				<div id="Rezults">
+					<div id = "NumberTitle">LCS-Length</div>
+					<textarea id="Number", readonly></textarea>
+					<div id="SequenceTitle">LCS</div>			
+					<textarea id="Sequence", readonly></textarea>			
 				</div>
+				<div id = "Extras"></div>
 			</div>
 		</div>
 		<div id="Main">
@@ -28,6 +35,9 @@
 				<div id="Code2">
 					<div id="CodeWrap"></div>
 				</div>
+				<div id="javascript">JavaScript</div>
+				<div id="C">C</div>
+				<div id="pseudo">PseudoCode</div>
 				<div id="Input2">
 					<textarea id = "S2"></textarea>
 				</div>
