@@ -1,283 +1,303 @@
 body{
-	background-color: rgb(190, 190, 190);
-	-moz-user-select: none; 
-    -khtml-user-select: none; 
-    -webkit-user-select: none; 
-    -o-user-select: none;
+	font-size:100%;
 }
-
+@font-face {
+    font-family: "Logo";
+    src: url(CartoGothicStd-Book.otf) format("truetype");
+}
+#navBar{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 7%;
+	background: #515151;
+	border-bottom: solid 1px #0B0B0b;
+	border-top: solid 1px #0B0B0b;
+	z-index: 10;
+	box-shadow: inset 0px -1px 0px 0px #777;
+}
+#Main{
+	position: absolute;
+	top: 7%;
+	left: 0px;
+	width: 100%;
+	height: 93%;
+	background: #515151;
+	z-index: 0;
+}
 #Panel{
 	position: absolute;
-	left: 0px;
 	top: 0px;
+	left: 0px;
 	width: 20%;
 	height: 100%;
+	border-right: solid 1px #0b0b0b;
+	z-index: 1;
+	background: #515151;
+	box-shadow: inset -1px 3px 0px 0px #777;
+}
+#Container{
+	position: absolute;
+	top: 0px;
+	left: 20%;
+	width: 80%;
+	height: 100%;
+	z-index: 0;
+	background: #333;
+}
+#logoHold{
+	position: absolute;
+	top: 10%;
+	left: 0px;
+	height: 00%;
+	width: 20%;
+	color: #B6CE38;
+	font-family: Tahoma;
+	font-size: 1em;
+	text-shadow: 1px 1px #222;
+	text-align: center;	
+}
+#vLine{
+	position: absolute;
+	top: 20%;
+	left: 20%;
+	height: 60%;
+	width: 3px;
+	background: #000;
+	box-shadow: inset 1px 0px 0px 0px #777, inset -1px 0px 0px 0px #777;
+}
+#vLine2{
+	position: absolute;
+	top: 20%;
+	left: 60%;
+	height: 60%;
+	width: 3px;
+	background: #000;
+	box-shadow: inset 1px 0px 0px 0px #777, inset -1px 0px 0px 0px #777;
+}
+#Left{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 50%;
+	height: 100%;
+	background: #333;
+	border-right: solid 1px black;
+	z-index: 1;
+}
+#Right{
+	position: absolute;
+	top: 0px;
+	left: 50%;
+	width: 50%;
+	height: 100%;
+	background: #333;
+	z-index: 0;
+}
+#LeftNav,#Rightnav{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	height: 6%;
+	width: 100%;
+	z-index: 2;
+	border-bottom: solid 1px black;
 }
 
-#ContentPanel{
+#TableWrap,#CodeWrap{
+	position: absolute;
+	top:6%;
+	left: 0px;
+	width: 100%;
+	height: 70%;
+	background: #333;
+	overflow-y: auto; 
+}
+
+
+#S1,#S2{
+	position: absolute;
+	top: 76%;
+	left: 0px;
+	width: 100%;
+	height: 20%;
+	background: #444;
+	border: none;
+	outline: none;
+	resize: none;
+	color: #ccc;
+	overflow-y: auto;
+	overflow-x: hidden; 
+	z-index: 1;
+	border-bottom: solid 1px black;
+	box-shadow:inset -1px 1px 0px 0px #666;
+}
+
+ol {
+	background:#551111;
+	overflow:auto;
+	font-family: 'Inconsolata', serif;
+	margin:0;
+	color:#ccc;
+	width:91.5%;
+}
+ol li:nth-child(even){
+	background:#151515;
+}
+ol li:nth-child(odd){
+	background:#222;
+}
+#CodeWrap ol code {
+	color:#ccc;
+	word-wrap: break-word;
+}
+#canvas{
+	background: #222;
+}
+#Status1, #Status2{
+	position: absolute;
+	top: 96%;
+	left: 0px;
+	width: 100%;
+	height: 4%;
+	z-index: 1;
+	background:#515151;
+	box-shadow:inset -1px 1px 0px 0px #777;
+	text-align: right;
+	font-family: 'Inconsolata', serif;
+	font-size: 15;
+	color: #aaa;
+}
+
+.button{
 	position: absolute;
 	left: 0px;
 	top: 0px;
+	width: 33.3%;
+	height: 100%;
+	border-right: solid 1px black;
+	box-shadow:inset 2px 3px 0px 0px #666;
+	background: #404040;
+	z-index: 2;
+}
+.button:hover{
+	background: #595959;
+	cursor: pointer;
+}
+
+#TutBut, #C{
+	left: 33.3%;
+	z-index: 1;
+}
+#WikiBut, #PseudoCode{
+	left: 66.6%;
+	z-index: 0;
+}
+
+.butColor, .butColor2{
+	position: absolute;
 	bottom: 0px;
-	right: 0px;
-	margin: auto;
+	left: 0px;
 	width: 100%;
-	height: 99%;
-	box-shadow:inset 0 0 20px #000000;
-	-moz-box-shadow:inset 0 0 20px #000000;
-	background: #3E424B;
+	height: 8%;
+	background: #f58360;
+}
+
+.butColor2{
+	background: #acd373;
+}
+
+.butText{
+	position: absolute;
+	top:25%;
+	left:0px;
+	width: 100%;
+	height:50%;
+	font-family: 'Inconsolata', serif;
+	font-size: 20px;
+	text-align: center;
+	color: #ddd;
+	text-shadow: 1px 1px #222;
 }
 
 #Rezults{
 	position: absolute;
-	left: 0px;
-	top: 0px;
-	width: 100%;
-	height: 40%;
-}
-
-#Extras{
-	position: absolute;
-	left: 0px;
-	top: 40%;
-	width: 100%;
-	height: 60%;
-}
-
-#Main{
-	position: absolute;
-	left: 20%;
-	top: 0px;
-	width: 80%;
-	height: 100%;
-}
-
-#Left{
-	position: absolute;
-	left: 0px;
-	top: 0px;
-	width: 50%;
-	height: 100%;
-}
-
-#Right{
-	position: absolute;
-	left: 50%;
-	top: 0px;
-	width: 50%;
-	height: 100%;
-}
-
-#Code1, #Code2{
-	position: absolute;
-	top: 0px;
-	left: 0px;
-	width: 100%;
-	height: 70%;
-
-}
-
-#Input1, #Input2{
-	position: absolute;
-	top: 70%;
-	left: 0px;
-	width: 100%;
-	height: 30%;
-}
-
-#S1, #S2{
-	position: absolute;
-	width: 98%;
-	height: 98%;
-	top: 0px;
-	bottom: 0px;
-	left: 0px;
-	right: 0px;
-	margin: auto;
-	resize: none;
-	border: none;
-}
-
-#CodeWrap, #TableWrap{
-	position: absolute;
-	width: 98%;
-	height: 98%;
-	top: 0px;
-	bottom: 0px;
-	left: 0px;
-	right: 0px;
-	margin: auto;
-	overflow-y: auto;
-}
-
-#CodeWrap{
-	-moz-user-select: text; 
-    -khtml-user-select: text; 
-    -webkit-user-select: text; 
-    -o-user-select: text;
-    cursor:default;
-}
-
-#TableWrap{
-	   -moz-user-select: -moz-none;
-   -khtml-user-select: none;
-   -webkit-user-select: none;
-    -o-user-select: none;
-}
-
-ol {
-	background:#036;
-	overflow:auto;
-	font-family: 'Inconsolata', serif;
-	margin:0;
-	color:#fff;
-	width:91.5%;
-	border-right: 1px solid;
-	border-left: 1px solid;
-	border-top: 1px solid;
-	border-color: #000;
-}
-ol li:nth-child(even){
-	background:#eee;
-}
-ol li:nth-child(odd){
-	background:#ddd;
-}
-#CodeWrap ol code {
-	color:#036;
-	word-wrap: break-word;
-}
-
-#canvas{
-	position: absolute;
-	top: 0px;
-	left: 0px;
-	width: 100%;
-	height: 100%;
-	background-color: #fff;
-}
-#Number,#Sequence{
-	position: absolute;
-	left: 0px;
-	width: 100%;
-	resize: none;
-	overflow-y: auto;
-	border:none;
-	outline:none;
-	background: none;
-}
-
-#NumberTitle{
-	position: absolute;
-	top:2%;
-	left: 3%;
-	width: 94%;
-	height:10%;
-	text-align:center;
-}
-#SequenceTitle{
-position: absolute;
-top: 30%;
-left: 0px;
-width: 100%;
-height: 10%;
-text-align:center;
-}
-
-#Number{
-	top:12%;
-	height:20%;
-	-moz-user-select: text; 
-    -khtml-user-select: text; 
-    -webkit-user-select: text; 
-    -o-user-select: text;
-    text-align:center;
-     font-size: 200%;
-}
-#Sequence{
-	top:40%;
-	height:60%;
-	-moz-user-select: text; 
-    -khtml-user-select: text; 
-    -webkit-user-select: text; 
-    -o-user-select: text;
-    text-align:center;
-}
-
-#pseudo{
-	position: absolute;
-	right: 6%;
 	top: 2%;
-	width: 20%;
-	height:3%;
-	background:  rgba(255, 255, 255, .4);
-	outline: solid #ccc 1px;
-	-moz-user-select: text; 
-    -khtml-user-select: text; 
-    -webkit-user-select: text; 
-    -o-user-select: text;
-    text-align:center;
-    font-family: 'Inconsolata', serif;
-    font-size: 90%;
-    color: black;
+	left: 0px;
+	width: 100%;
+	height: 5%;
+	text-align: center;
+	font-family: Tahoma;
+	color: #B6CE38;
+	text-shadow: 1px 1px #222;
 }
-#pseudo:hover{
-	color: red;
-	cursor:pointer;
-	background: rgba(255, 255, 255, 1);
-}
-
-#javascript{
+.hLine{
 	position: absolute;
-	right: 6%;
 	top: 6%;
-	width: 20%;
-	height:3%;
-	background:  rgba(255, 255, 255, .4);
-	outline: solid #ccc 1px;
-	-moz-user-select: text; 
-    -khtml-user-select: text; 
-    -webkit-user-select: text; 
-    -o-user-select: text;
-    text-align:center;
-    font-family: 'Inconsolata', serif;
-    font-size: 90%;
+	left: 10%;
+	width: 80%;
+	height: 3px;
+	background: #000;
+	box-shadow: inset 0px 1px 0px 0px #777, inset 0px -1px 0px 0px #777;
 }
-#javascript:hover{
-	color: red;
-	cursor:pointer;
-	background: rgba(255, 255, 255, 1);
+
+#hLine2{
+	top:14%;
 }
-#C{
+
+#Length{
 	position: absolute;
-	right: 6%;
-	top: 10%;
-	width: 20%;
-	height:3%;
-	background:  rgba(255, 255, 255, .4);
-	outline: solid #ccc 1px;
-		-moz-user-select: text; 
-    -khtml-user-select: text; 
-    -webkit-user-select: text; 
-    -o-user-select: text;
-    text-align:center;
-    font-family: 'Inconsolata', serif;
-    font-size: 90%;
-}
-#C:hover{
-	color: red;
-	cursor:pointer;
-	background:  rgba(255, 255, 255, 1);
+	top: 7.5%;
+	left: 50%;
+	width: 40%;
+	height: 5%;
+	background: #333;
+	resize: none;
+	outline: none;
+	color: #ccc;
+	text-align: center;
+	border: solid 1px black;
+	font-size: 25px;
+	color: #ccc;
 }
 
-#NumberTitle, #SequenceTitle, #Number, #Sequence {
-	color: rgba(255, 255, 255, 0.6);
+#LCS-Length{
+	position: absolute;
+	top: 8.5%;
+	left: 8%;
+	width: 40%;
+	height: 5%;
+	text-align: left;
+	font-size: 20px;
+	color: #ccc;
+	text-shadow: 1px 1px #222;
+
+}
+#LCS{
+	position: absolute;
+	top: 16%;
+	left: 42.5%;
+	width: 15%;
+	height: 5%;
+	color: #ccc;
+	text-align: center;
+	font-size: 20px;
+	color: #ccc;
+	text-shadow: 1px 1px #222;
+
 }
 
-#NumberTitle{
-    background: -moz-linear-gradient(top, #f6e6b4 0%, #ed9017 100%); /* firefox */
-    -moz-box-shadow:    inset 0 0 20px rgba(0,0,0,.6);
-   -webkit-box-shadow: inset 0 0 20px rgba(0,0,0,.6);
-   box-shadow:         inset 0 0 20px rgba(0,0,0,.6);
-    background: rgb(56,59,62);
+#Seq{
+	position: absolute;
+	top: 20%;
+	left: 5%;
+	width: 90%;
+	height: 15%;
+	background: #333;
+	resize: none;
+	outline: none;
+	color: #ccc;
+	text-align: center;
+	border: solid 1px black;
 }

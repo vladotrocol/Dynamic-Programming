@@ -125,7 +125,7 @@ function draw_table(offsetX, offsetY) {
         }
         if (pos.x + x > -2 * zoom * 10 - tw + canvas.width && pos.x + x < 0 + 2 * zoom * 10) pos.x += x;
         if (pos.y + y > -2 * zoom * 10 - th + canvas.height && pos.y + y < 0 + 2 * zoom * 10) pos.y += y;
-        ctx.fillStyle = '#009900';
+        ctx.fillStyle = '#B2C730';
         ctx.font = "italic " + zoom * 4 + "px sans-serif";
         ctx.textBaseline = 'top';
         ctx.fillText("y[j]", pos.x + zoom * 5 / 2, pos.y - zoom * 5 - 2);
@@ -136,34 +136,34 @@ function draw_table(offsetX, offsetY) {
         ctx.fillText("i", pos.x - zoom * 10, pos.y - zoom * 5);
 
         for (var it in Path) {
-            ctx.fillStyle = "ccc";
+            ctx.fillStyle = "#333";
             ctx.fillRect(Path[it].j * zoom * 10 + pos.x, Path[it].i * 10 * zoom + pos.y, zoom * 10, zoom * 10);
         }
 
             for (var it in Path) {
             if(Path[it].t=="{"){
-                ctx.fillStyle = "rgba(255, 255, 0, .5)";
+                ctx.strokeStyle = "rgba(255, 255, 255, .3)";
                 ctx.lineWidth= 0;
                 ctx.beginPath();
                 ctx.arc(Path[it].j * zoom * 10 + pos.x+30*zoom/4, Path[it].i * 10 * zoom + pos.y+30*zoom/4,5*zoom/2, 0, 2*Math.PI, false);
-                ctx.fill();
+                ctx.stroke();
                 ctx.closePath();
 
                 ctx.beginPath();
                 ctx.arc(Path[it].j * zoom * 10 + pos.x+4*zoom, -5 * zoom/2 + pos.y -2,5*zoom/2, 0, 2*Math.PI, false);
-                ctx.fill();
+                ctx.stroke();
                 ctx.closePath();
 
                 ctx.beginPath();
                 ctx.arc(pos.x-5*zoom/2,Path[it].i*zoom*10+pos.y+5*zoom+2,5*zoom/2, 0, 2*Math.PI, false);
-                ctx.fill();
+                ctx.stroke();
                 ctx.closePath();
             }
         }
 
         for (var i = 0; i <= m; i++) {
             var ii = i * 10 * zoom + pos.y;
-            if (ii > -zoom * 10) {
+            if (ii > -2*zoom * 10) {
                 if (ii < canvas.height + zoom * 10) {
                     var txtSize = 0;
                     for (var j = 0; j <= n; j++) {
@@ -179,12 +179,12 @@ function draw_table(offsetX, offsetY) {
                         if (jj > -2*zoom * 10) {
                             if (jj < canvas.width + zoom * 10) {
                                 ctx.font = "italic " + txtSize + "px sans-serif";
-                                ctx.strokeStyle = "rgba(0, 0 ,0, 1)";
+                                ctx.strokeStyle = "rgba(100, 100 ,100, 1)";
                                 ctx.lineWidth = 1;
                                 ctx.strokeRect(jj, ii, 10 * zoom, 10 * zoom);
-                                ctx.fillStyle = '#AA1414';
+                                ctx.fillStyle = '#D75813';
                                 ctx.fillText(a.c[i][j], pos.x + (j + 1) * zoom * 10 - ctx.measureText(a.c[i][j]).width - 4, pos.y + (i + 1) * zoom * 10 -txtSize - 2);
-                                ctx.fillStyle = '#009900';
+                                ctx.fillStyle = '#B2C730';
                                 if (j < n) {
                                     ctx.fillText(s2[j], (j + 1) * zoom * 10 + pos.x + zoom * 5 / 2, pos.y - zoom * 5 - 4);
                                 }
@@ -193,7 +193,7 @@ function draw_table(offsetX, offsetY) {
                                 ctx.fillText(j, jj + zoom * 5 / 2, pos.y - 2 * zoom * 5 - 2);
 
                                 ctx.lineWidth = Math.round(zoom / 3);
-                                ctx.strokeStyle = "rgba(168, 20 ,173, 1)";
+                                ctx.strokeStyle = "#727";
                                 if (a.b[i][j] == "-") {
                                     ctx.beginPath();
                                     ctx.moveTo(jj + 5 * zoom, ii + 7 * zoom);
@@ -230,7 +230,7 @@ function draw_table(offsetX, offsetY) {
                     }
                     ctx.lineWidth = 1;
                     ctx.fillText(i, pos.x - zoom * 10, ii + zoom * 5 / 2);
-                    ctx.fillStyle = '#009900';
+                    ctx.fillStyle = '#B2C730';
                     ctx.font = "italic " + zoom * 5 + "px sans-serif";
                     if (i < m) {
                         ctx.fillText(s1[i], pos.x - ctx.measureText(s1[i]).width - 4, (i + 1) * zoom * 10 + pos.y + zoom * 5 / 2);
@@ -291,47 +291,12 @@ window.onload = function() {
     canvas.onmousedown = function(e) {
         drag = true;
         start_position = getMouse(e);
-        var rc = document.getElementById("CodeWrap");
-        rc.style["-moz-user-select"] = "none"; 
-        rc.style["-khtml-user-select"] = "none"; 
-        rc.style["-webkit-user-select"]= "noen"; 
-        rc.style["-o-user-select"]= "none";
     };
     window.onmouseup = function(e) {
         drag = false;
-        var rc = document.getElementById("CodeWrap");
-        rc.style["-moz-user-select"] = "text"; 
-        rc.style["-khtml-user-select"] = "text"; 
-        rc.style["-webkit-user-select"]= "text"; 
-        rc.style["-o-user-select"]= "text";
-        var rcc = document.getElementById("Sequence");
-        rcc.style["-moz-user-select"] = "text"; 
-        rcc.style["-khtml-user-select"] = "text"; 
-        rcc.style["-webkit-user-select"]= "text"; 
-        rcc.style["-o-user-select"]= "text";
-        var rcc2 = document.getElementById("Number");
-        rcc2.style["-moz-user-select"] = "text"; 
-        rcc2.style["-khtml-user-select"] = "text"; 
-        rcc2.style["-webkit-user-select"]= "text"; 
-        rcc2.style["-o-user-select"]= "text";
     };
     canvas.onmouseout = function(e) {
         drag = false;
-        var rc = document.getElementById("CodeWrap");
-        rc.style["-moz-user-select"] = "none"; 
-        rc.style["-khtml-user-select"] = "none"; 
-        rc.style["-webkit-user-select"]= "none"; 
-        rc.style["-o-user-select"]= "none";
-        var rcc = document.getElementById("Sequence");
-        rcc.style["-moz-user-select"] = "none"; 
-        rcc.style["-khtml-user-select"] = "none"; 
-        rcc.style["-webkit-user-select"]= "none"; 
-        rcc.style["-o-user-select"]= "none";
-        var rcc2 = document.getElementById("Number");
-        rcc2.style["-moz-user-select"] = "none"; 
-        rcc2.style["-khtml-user-select"] = "none"; 
-        rcc2.style["-webkit-user-select"]= "none"; 
-        rcc2.style["-o-user-select"]= "none";
     };
     canvas.onmousemove = function(e) {
         if (drag == true) {
@@ -357,7 +322,7 @@ window.onload = function() {
         }
     };
 
-    document.getElementById("javascript").onmouseup=function(e){
+    document.getElementById("Javascript").onmouseup=function(e){
         remove_code();
         add_code("js");
     };
@@ -365,7 +330,7 @@ window.onload = function() {
         remove_code();
         add_code("c");
     };
-    document.getElementById("pseudo").onmouseup=function(e){
+    document.getElementById("PseudoCode").onmouseup=function(e){
         remove_code();
         add_code("s");
     };
@@ -379,9 +344,13 @@ function process(offsetX, offsetY) {
         Path.length = 0;
         a = LCS_Length(s1, s2);
         printLCS(a.b, s1, s1.length, s2.length);   
-        var rNumber = document.getElementById("Number");
-        rNumber.innerText = a.c[s1.length][s2.length];
-        var rSequence = document.getElementById("Sequence");
-        rSequence.innerText = Out.join();
+        var rNumber = document.getElementById("Length");
+        rNumber.value = a.c[s1.length][s2.length];
+        var rSequence = document.getElementById("Seq");
+        rSequence.value = Out.join();
+        var Status1 = document.getElementById("Status1");
+        var Status2 = document.getElementById("Status2");
+        Status1.innerText = "Input 1 size: "+s1.length + "\u00a0";
+        Status2.innerText = "Input 2 size: "+s2.length + "\u00a0";
         draw_table(0, 0);
 }

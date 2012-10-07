@@ -9,37 +9,66 @@
 	</head>
 	
 	<body>
-		<div id="Panel">
-			<div id="ContentPanel">
-				<div id="Rezults">
-					<div id = "NumberTitle">LCS-Length</div>
-					<textarea id="Number", readonly></textarea>
-					<div id="SequenceTitle">LCS</div>			
-					<textarea id="Sequence", readonly></textarea>			
-				</div>
-				<div id = "Extras"></div>
-			</div>
+		<div id = "navBar">
+			<div id = "logoHold">DYNAMIC<br>PROGRAMMING</div>
+			<div id = "vLine"></div>
+			<div id = "vLine2"></div>
 		</div>
-		<div id="Main">
-			<div id="Left">
-				<div id="Code1">
-					<div id="TableWrap">
+		<div id = "Main">
+			<div id = "Panel">
+				<div id = "Rezults">Results:</div>
+				<div id = "hLine1" class  = "hLine"></div>
+				<div id = "LCS-Length">LCS-Length:</div>
+				<textarea id = "Length" readonly></textarea>
+				<div id = "hLine2" class  = "hLine"></div>
+				<div id = "LCS" >LCS</div>
+				<textarea id = "Seq" readonly></textarea>
+			</div>
+			<div id = "Container">
+				<div id = "Left">
+					<div id = "LeftNav">
+						<div id = "TableBut" class = "button">
+							<div id = "TableButText" class = "butText">Table</div>
+							<div id = "TableButColor" class = "butColor"></div>
+						</div>
+						<div id = "TutBut" class = "button">
+							<div id = "TutButText" class = "butText">Tutorial</div>
+							<div id = "TutButColor" class = "butColor"></div>
+						</div>
+						<div id = "WikiBut" class = "button">
+							<div id = "WikiButText" class = "butText">Wiki</div>
+							<div id = "WikiButColor" class = "butColor"></div>
+						</div>
+					</div>
+					<div id = "TableWrap">
 						<canvas id="canvas"></canvas>
 					</div>
+					<div id = "Input1">
+						<textarea id="S1"></textarea>
+					</div>
+					<div id = "Status1"></div>
 				</div>
-				<div id="Input1">
-					<textarea id = "S1"></textarea>
-				</div>
-			</div>
-			<div id="Right">
-				<div id="Code2">
-					<div id="CodeWrap"></div>
-				</div>
-				<div id="javascript">JavaScript</div>
-				<div id="C">C</div>
-				<div id="pseudo">PseudoCode</div>
-				<div id="Input2">
-					<textarea id = "S2"></textarea>
+				<div id = "Right">
+					<div id = "RightNav">
+						<div id = "Javascript" class = "button">
+							<div id = "JavaButText" class = "butText">JavaScript</div>
+							<div id = "TableButColor" class = "butColor2"></div>
+						</div>
+						<div id = "C" class = "button">
+							<div id = "CButText" class = "butText">C</div>
+							<div id = "TableButColor" class = "butColor2"></div>
+						</div>
+						<div id = "PseudoCode" class = "button">
+							<div id = "PseudoButText" class = "butText">PseudoCode</div>
+							<div id = "TableButColor" class = "butColor2"></div>
+						</div>
+					</div>
+					<div id = "CodeWrap">
+					</div>
+					<div id = "Input2">
+						<textarea id="S2"></textarea>
+					</div>
+					<div id = "Status2"></div>
 				</div>
 			</div>
 		</div>
