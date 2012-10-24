@@ -101,6 +101,7 @@ function remove_code(){
     el.removeChild(ol);
 }
 
+
 var pos = {
     x: 0,
     y: 0
@@ -123,8 +124,8 @@ function draw_table(offsetX, offsetY) {
         if (th + 2 * zoom * 10 < canvas.height) {
             pos.y = (canvas.height - th) / 2
         }
-        if (pos.x + x > -2 * zoom * 10 - tw + canvas.width && pos.x + x < 0 + 2 * zoom * 10) pos.x += x;
-        if (pos.y + y > -2 * zoom * 10 - th + canvas.height && pos.y + y < 0 + 2 * zoom * 10) pos.y += y;
+        if (pos.x + x > -2 * zoom * 10 - tw + canvas.width && pos.x + x < 0 + (2) * zoom * 10) pos.x += x;
+        if (pos.y + y > -2 * zoom * 10 - th + canvas.height && pos.y + y < 0 + (2) * zoom * 10) pos.y += y;
         ctx.fillStyle = '#B2C730';
         ctx.font = "italic " + zoom * 4 + "px sans-serif";
         ctx.textBaseline = 'top';
@@ -185,13 +186,14 @@ function draw_table(offsetX, offsetY) {
                                 ctx.fillStyle = '#D75813';
                                 ctx.fillText(a.c[i][j], pos.x + (j + 1) * zoom * 10 - ctx.measureText(a.c[i][j]).width - 4, pos.y + (i + 1) * zoom * 10 -txtSize - 2);
                                 ctx.fillStyle = '#B2C730';
-                                if (j < n) {
-                                    ctx.fillText(s2[j], (j + 1) * zoom * 10 + pos.x + zoom * 5 / 2, pos.y - zoom * 5 - 4);
+                                if (i==0){
+                                    if (j < n) {
+                                        ctx.fillText(s2[j], (j + 1) * zoom * 10 + pos.x + zoom * 5 / 2, pos.y - zoom * 5 - 4);
+                                    }
+                                    ctx.fillStyle = '#33abd1';
+                                    ctx.font = "italic " + zoom * 4 + "px sans-serif";
+                                    ctx.fillText(j, jj + zoom * 5 / 2, pos.y - 2 * zoom * 5 - 2);
                                 }
-                                ctx.fillStyle = '#33abd1';
-                                ctx.font = "italic " + zoom * 4 + "px sans-serif";
-                                ctx.fillText(j, jj + zoom * 5 / 2, pos.y - 2 * zoom * 5 - 2);
-
                                 ctx.lineWidth = Math.round(zoom / 3);
                                 ctx.strokeStyle = "#727";
                                 if (a.b[i][j] == "-") {
@@ -228,6 +230,7 @@ function draw_table(offsetX, offsetY) {
                             }
                         }
                     }
+                    ctx.fillStyle = "#33abd1";
                     ctx.lineWidth = 1;
                     ctx.fillText(i, pos.x - zoom * 10, ii + zoom * 5 / 2);
                     ctx.fillStyle = '#B2C730';
@@ -262,6 +265,40 @@ function getMouse(e) {
     };
 }
 
+function nullify (a){
+    for (var i in a){
+        a[i] = 0;
+    }
+}
+
+
+function style_down(b){
+    b.style.background = "#353535";
+    b.style.boxShadow = "inset 2px 3px 0px 0px #222";
+    b.childNodes[3].style.background = "#acd373";
+    b.childNodes[3].style.bottom = "";
+    b.childNodes[3].style.top = "2px";
+}
+
+function style_up(b){
+    b.style.background = "#404040";
+    b.style.boxShadow = "inset 2px 3px 0px 0px #666";
+    b.childNodes[3].style.background = "#f58360";
+    b.childNodes[3].style.top = "";
+    b.childNodes[3].style.bottom = "0px";
+}
+
+function style_buts(a){
+    for(var i in a){
+        if (a[i]==1){
+            style_down(document.getElementById(i));
+        }
+        else {
+            style_up(document.getElementById(i));
+        }
+    }
+}
+
 window.onload = function() {
     var input1 = document.getElementById("S1");
     var input2 = document.getElementById("S2");
@@ -274,9 +311,37 @@ window.onload = function() {
     var offsetX = 0;
     var offsetY = 0;
     var pace = 1;
+    var left_buts = {TableBut: 1, TutBut: 0, WikiBut: 0};
+    var right_buts = {Javascript: 1, C: 0, PseudoCode: 0};
     pos.x = 0;
     pos.y = 0;
     add_code("js");
+    var s1 = document.getElementById("S1");
+    s1.value = "Insert first string here...";
+    var s2 = document.getElementById("S2");
+    s2.value = "Insert second string here...";
+
+    style_buts(right_buts);
+    style_buts(left_buts);
+    var img = new Image();
+    img.src = "Logo.png";
+    img.onload = function (e){
+        ctx.drawImage(img, (canvas.width - img.width)/2,(canvas.height - img.height - 20)/2) ;
+    }
+    ctx.font = "italic " + 20 + "px sans-serif";
+    ctx.fillStyle = "#999";
+    ctx.fillText("Give me input ^_^", (canvas.width-ctx.measureText("Give me input ^_^").width)/2 , (canvas.height+img.height + 20)/2);
+
+    s1.onclick = function (e){
+       if(s1.value == "Insert first string here..."){
+        s1.value = "";
+       }
+    }
+    s2.onclick = function (e){
+       if(s2.value == "Insert second string here..."){
+        s2.value = "";
+       }
+    }
     input1.onkeyup = function(e) {
         pos.x=zoom*20;
         pos.y=zoom*20;
@@ -314,10 +379,14 @@ window.onload = function() {
     canvas.onmousewheel = function (e){
         if(e.wheelDelta>=120){
             zoom++;
+            pos.x=zoom*20;
+            pos.y=zoom*20;
             draw_table(0,0);
         }
         else if(e.wheelDelta<=-120&&zoom>=2){
             zoom--;
+            pos.x=zoom*20;
+            pos.y=zoom*20;
             draw_table(0,0);
         }
     };
@@ -325,14 +394,47 @@ window.onload = function() {
     document.getElementById("Javascript").onmouseup=function(e){
         remove_code();
         add_code("js");
+        nullify(right_buts);
+        right_buts["Javascript"] = 1;
+        style_buts(right_buts);
     };
     document.getElementById("C").onmouseup=function(e){
         remove_code();
         add_code("c");
+        nullify(right_buts);
+        right_buts["C"] = 1;
+        style_buts(right_buts);
     };
     document.getElementById("PseudoCode").onmouseup=function(e){
         remove_code();
         add_code("s");
+        nullify(right_buts);
+        right_buts["PseudoCode"] = 1;
+        style_buts(right_buts);
+    };
+    document.getElementById("TableBut").onmouseup=function(e){
+        document.getElementById("DyWiki").style.display="none";
+        document.getElementById("Tutorial").style.display="none";
+        document.getElementById("canvas").style.display="block";
+        nullify(left_buts);
+        left_buts["TableBut"] = 1;
+        style_buts(left_buts);
+    };
+    document.getElementById("TutBut").onmouseup=function(e){
+        document.getElementById("DyWiki").style.display="none";
+        document.getElementById("Tutorial").style.display="block";
+        document.getElementById("canvas").style.display="none";
+        nullify(left_buts);
+        left_buts["TutBut"] = 1;
+        style_buts(left_buts);
+    };
+    document.getElementById("WikiBut").onmouseup=function(e){
+        document.getElementById("DyWiki").style.display="block";
+        document.getElementById("Tutorial").style.display="none";
+        document.getElementById("canvas").style.display="none";
+        nullify(left_buts);
+        left_buts["WikiBut"] = 1;
+        style_buts(left_buts);
     };
 
 }
@@ -342,15 +444,17 @@ function process(offsetX, offsetY) {
     s2 = document.getElementById("S2").value;
         Out.length = 0;
         Path.length = 0;
-        a = LCS_Length(s1, s2);
-        printLCS(a.b, s1, s1.length, s2.length);   
-        var rNumber = document.getElementById("Length");
-        rNumber.value = a.c[s1.length][s2.length];
-        var rSequence = document.getElementById("Seq");
-        rSequence.value = Out.join();
-        var Status1 = document.getElementById("Status1");
-        var Status2 = document.getElementById("Status2");
-        Status1.innerText = "Input 1 size: "+s1.length + "\u00a0";
-        Status2.innerText = "Input 2 size: "+s2.length + "\u00a0";
-        draw_table(0, 0);
+        if(s1!=="Insert first string here..."&&s2!="Insert second string here..."){
+            a = LCS_Length(s1, s2);
+            printLCS(a.b, s1, s1.length, s2.length);   
+            var rNumber = document.getElementById("Length");
+            rNumber.value = a.c[s1.length][s2.length];
+            var rSequence = document.getElementById("Seq");
+            rSequence.value = Out.join();
+            var Status1 = document.getElementById("Status1");
+            var Status2 = document.getElementById("Status2");
+            Status1.innerText = "Input 1 size: "+s1.length + "\u00a0";
+            Status2.innerText = "Input 2 size: "+s2.length + "\u00a0";
+            draw_table(0, 0);
+        }
 }

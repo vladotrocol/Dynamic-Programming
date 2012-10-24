@@ -10,9 +10,11 @@
 	
 	<body>
 		<div id = "navBar">
-			<div id = "logoHold">DYNAMIC<br>PROGRAING</div>
+			<div id = "logoHold">DYNAMIC<br>PROGRAMMING</div>
 			<div id = "vLine"></div>
 			<div id = "vLine2"></div>
+			<div id = "Title">Longest Common Subsequence</div>
+			<div id = "Author">Developed by <a href="https://github.com/vladotrocol"><span style="color:#41db00;">Vlad Otrocol</span></a><br> Get the <a href="https://github.com/vladotrocol/Dynamic-Programming"><span style = "color:#ffcf00;">source</span></a></div>
 		</div>
 		<div id = "Main">
 			<div id = "Panel">
@@ -21,8 +23,20 @@
 				<div id = "LCS-Length">LCS-Length:</div>
 				<textarea id = "Length" readonly></textarea>
 				<div id = "hLine2" class  = "hLine"></div>
-				<div id = "LCS" >LCS</div>
+				<div id = "LCS" >LCS:</div>
 				<textarea id = "Seq" readonly></textarea>
+				<div id = "hLine3" class  = "hLine"></div>
+				<div id = "chLogo"><img src="Ch.png"></div>
+				<div id = "Chrome">Tested on Chrome Version 22</div>
+				<div id = "RefTitle">References:</div>
+				<div id = "Ref"><a style = "text-decoration:none;" href="http://www.daniweb.com/software-development/c/code/216986/longest-common-subsequence"><span style = "color:#ccc; text-decoration:underline;">C code adaptation</span></a><br><a style = "text-decoration:none;" href="http://tjkdesign.com/articles/how_to_style_a_code_listing.asp"><span style = "color:#ccc; text-decoration:underline;">List code formatting</span></a><br><a  style = "text-decoration:none;" href="http://www.amazon.com/Introduction-Algorithms-Includes-CD-Rom-Thomas/dp/0072970545"><span style = "color:#ccc; text-decoration:underline;">Introduction to Algorithms (CLRS)</span></a></div>
+				<div id = "hLine4" class  = "hLine"></div>
+				<div id = "hLine5" class  = "hLine"></div>
+				<div id = "hLine6" class  = "hLine"></div>
+				<textarea id = "Description">Description
+					This app is built to help you understand dynamic programming by visualising the mechanics behind a famous example: Longest Common Subsequence. The algorithm is implemented in several languages which you can try and you can also visualise the table filling process. We also put up a step-by-step tutorial and a wiki to help with your understanding.
+					This is an open-source project. Feel free to make any changes as long as you give me credit.
+				</textarea>
 			</div>
 			<div id = "Container">
 				<div id = "Left">
@@ -41,6 +55,10 @@
 						</div>
 					</div>
 					<div id = "TableWrap">
+						<div id = "DyWiki">In biological applications, we often want to compare the DNA of two (or more) different organisms. A strand of DNA consists of a string of molecules called bases, where the possible bases are adenine, guanine, cytosine, and thymine. Representing each of these bases by their initial letters, a strand of DNA can be expressed as a string over the finite set {A, C, G, T}. (See Appendix C for a definition of a string.) For example, the DNA of one organism may be S1= ACCGGTCGAGTGCGCGGAAGCCGGCCGAA, while the DNA of another organism may be S2 = GTCGTTCGGAATGCCGTTGCTCTGTAAA. One goal of comparing two strands of DNA is to determine how "similar" the two strands are, as some measure of how closely related the two organisms are. Similarity can be and is defined in many different ways. For example, we can say that two DNA strands are similar if one is a substring of the other. (Chapter 32 explores algorithms to solve this problem.) In our example, neither S1 nor S2 is a substring of the other. Alternatively, we could say that two strands are similar if the number of changes needed to turn one into the other is small. (Problem 15-3 looks at this notion.) Yet another way to measure the similarity of strands S1 and S2 is by finding a third strand S3 in which the bases in S3 appear in each of S1 and S2; these bases must appear in the same order, but not necessarily consecutively. The longer the strand S3 we can find, the more similar S1 and S2 are. In our example, the longest strand S3 is GTCGTCGGAAGCCGGCCGAA.
+
+</div>
+						<canvas id = "Tutorial"></canvas>
 						<canvas id="canvas"></canvas>
 					</div>
 					<div id = "Input1">

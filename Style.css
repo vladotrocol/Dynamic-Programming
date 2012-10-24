@@ -12,6 +12,7 @@ body{
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
     -webkit-border-radius: 10px;
     border-radius: 10px;
+    background: #444;
 }
  
 /* Handle */
@@ -41,6 +42,33 @@ body{
 	z-index: 10;
 	box-shadow: inset 0px -1px 0px 0px #777;
 }
+
+#Title{
+	position: absolute;
+	left: 21%;
+	top: 25%;
+	width: 38%;
+	height: 50%;
+	color: #B6CE38;
+	font-family: Tahoma;
+	font-size: 1em;
+	text-shadow: 1px 1px #222;
+	text-align: center;	
+}
+
+#Author{
+	position: absolute;
+	right: 1%;
+	top: 15%;
+	width: 38%;
+	height: 50%;
+	color: #ccc;
+	font-family: Tahoma;
+	font-size: 14;
+	text-shadow: 1px 1px #222;
+	text-align: right;	
+}
+
 #Main{
 	position: absolute;
 	top: 7%;
@@ -179,6 +207,26 @@ ol li:nth-child(odd){
 #canvas{
 	background: #222;
 }
+#canvas, #DyWiki, #Tutorial{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+}
+#DyWiki{
+	background: #333;
+	resize: none;
+	outline: none;
+	color: #999;
+	text-align: center;
+	font-size: 12;
+
+}
+
+#Tutorial{
+	background: #00f;
+}
 #Status1, #Status2{
 	position: absolute;
 	top: 96%;
@@ -206,7 +254,6 @@ ol li:nth-child(odd){
 	z-index: 2;
 }
 .button:hover{
-	background: #595959;
 	cursor: pointer;
 }
 
@@ -256,6 +303,50 @@ ol li:nth-child(odd){
 	color: #B6CE38;
 	text-shadow: 1px 1px #222;
 }
+#RefTitle{
+	position: absolute;
+	top: 85%;
+	left: 0px;
+	width: 100%;
+	height: 5%;
+	text-align: center;
+	font-family: Tahoma;
+	color: #B6CE38;
+	text-shadow: 1px 1px #222;
+}
+#Chrome{
+	position: absolute;
+	top: 96.4%;
+	left: 0px;
+	width: 100%;
+	height: 3%;
+	text-align: center;
+	font-family: Tahoma;
+	color: #B6CE38;
+	text-shadow: 1px 1px #222;
+	font-size: 13px;
+	overflow-y: auto;
+}
+
+#chLogo{
+	position: absolute;
+	top: 96.5%;
+	left: 11%;
+	width: 20%;
+	height: 2%;
+}
+#Ref{
+	position: absolute;
+	top: 89.5%;
+	left: 0px;
+	width: 100%;
+	height: 5%;
+	text-align: center;
+	font-family: Tahoma;
+	color: #ccc;
+	text-shadow: 1px 1px #222;
+	font-size: 10px;
+}
 .hLine{
 	position: absolute;
 	top: 6%;
@@ -269,6 +360,26 @@ ol li:nth-child(odd){
 #hLine2{
 	top:14%;
 }
+#hLine5{
+	top:89%;
+}
+#hLine3{
+	top:36%;
+	left: 0px;
+	width: 100%;
+}
+#hLine4{
+	top:95.5%;
+	left: 0px;
+	width: 100%;
+}
+#hLine6{
+	top:84%;
+	left: 0px;
+	width: 100%;
+}
+
+
 
 #Length{
 	position: absolute;
@@ -324,4 +435,30 @@ ol li:nth-child(odd){
 	color: #ccc;
 	text-align: center;
 	border: solid 1px black;
+}
+#Description{
+	position: absolute;
+	top: 38%;
+	left: 5%;
+	width: 90%;
+	height: 44%;
+	background: #333;
+	resize: none;
+	outline: none;
+	color: #999;
+	text-align: center;
+	border: solid 1px black;
+	font-size: 12;
+}
+#Credit{
+	position: absolute;
+	left: 5%;
+	top: 79%;
+	width: 90%;
+	height: 60%;
+	text-align: center;
+	font-family: Tahoma;
+	color: #B6CE38;
+	text-shadow: 1px 1px #222;
+	font-size: 12px;
 }
